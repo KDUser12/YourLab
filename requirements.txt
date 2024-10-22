@@ -1,0 +1,4 @@
+# Package required (not automatically installed)
+setuptools~=75.2.0
+# Package required (automatically installed)
+argparse~=1.1

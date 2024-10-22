@@ -16,6 +16,9 @@ import logging
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 
 from __init__ import __shortname__, __longname__, __version__
+from utils._os import check_os_compatibility
+from utils.env import check_python_version
+from utils.packages import check_and_install_dependencies
 
 
 def setup_logging(debug=False):
@@ -42,3 +45,10 @@ if __name__ == '__main__':
 
     if args.recoverymode and args.devmode:
         logging.error("You cannot run multiple modes in the same program.")
+
+    try:
+        check_os_compatibility()
+        check_python_version(['3.8'])
+        check_and_install_dependencies(["requirements.txt"])
+    except EnvironmentError as error:
+        exit(logging.error(error))
